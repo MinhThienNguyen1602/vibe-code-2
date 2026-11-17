@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Máy Mô Phỏng Bội Chung Nhỏ Nhất Bằng Bánh Răng</title>
+    <meta
+      name="description"
+      content="Học liệu Toán học tương tác mô phỏng Bội chung nhỏ nhất (BCNN), Ước chung lớn nhất (ƯCLN) và tỉ số truyền động qua hệ bánh răng ăn khớp."
+    />
+    <meta
+      property="og:title"
+      content="Máy Mô Phỏng Bội Chung Nhỏ Nhất Bằng Bánh Răng"
+    />
+    <meta
+      property="og:description"
+      content="Khám phá trực quan mối liên hệ giữa số răng bánh răng, số vòng quay và Bội chung nhỏ nhất (BCNN)."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="gear-lcm-app">
+      <header class="gl-header">
+        <div class="gl-header-inner">
+          <div class="gl-title-group">
+            <h1 class="gl-title">
+              Máy Mô Phỏng Bội Chung Nhỏ Nhất Bằng Bánh Răng
+            </h1>
+            <p class="gl-subtitle">
+              Mô hình tương tác khám phá mối liên hệ giữa số răng, số vòng quay
+              và BCNN(A, B)
+            </p>
+          </div>
+          <nav class="gl-presets" aria-label="Bộ ví dụ mẫu">
+            <span class="gl-presets-label">Ví dụ nhanh</span>
+            <div class="gl-preset-buttons" id="gl-preset-buttons">
+              <button
+                type="button"
+                class="gl-preset-btn"
+                data-a="6"
+                data-b="8"
+              >
+                6 &amp; 8
+              </button>
+              <button
+                type="button"
+                class="gl-preset-btn"
+                data-a="8"
+                data-b="12"
+              >
+                8 &amp; 12
+              </button>
+              <button
+                type="button"
+                class="gl-preset-btn gl-is-active"
+                data-a="12"
+                data-b="18"
+              >
+                12 &amp; 18
+              </button>
+              <button
+                type="button"
+                class="gl-preset-btn"
+                data-a="9"
+                data-b="15"
+              >
+                9 &amp; 15
+              </button>
+              <button
+                type="button"
+                class="gl-preset-btn"
+                data-a="7"
+                data-b="11"
+              >
+                7 &amp; 11
+              </button>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main class="gl-workspace">
+        <section class="gl-stage-column" aria-label="Sân khấu mô phỏng bánh răng">
+          <div class="gl-card gl-stage-card">
+            <div class="gl-stage-topbar">
+              <div
+                class="gl-status-banner gl-status-start"
+                id="gl-status-banner"
+                role="status"
+                aria-live="polite"
+              >
+                <span class="gl-status-icon" id="gl-status-icon" aria-hidden="true"></span>
+                <span class="gl-status-text" id="gl-status-text">
+                  Điểm xuất phát — Hai dấu chuẩn gặp nhau tại điểm tiếp xúc
+                </span>
+              </div>
+              <div class="gl-stage-counter">
+                <span class="gl-counter-label">Đã ăn khớp</span>
+                <strong class="gl-counter-value" id="gl-meshed-counter">0 / 36 răng</strong>
+              </div>
+            </div>
+
+            <div class="gl-svg-frame" id="gl-svg-frame">
+              <svg
+                id="gl-gear-svg"
+                class="gl-gear-svg"
+                viewBox="0 0 760 440"
+                role="img"
+                aria-labelledby="gl-svg-title gl-svg-desc"
+              >
+                <title id="gl-svg-title">
+                  Mô phỏng hai bánh răng A và B ăn khớp
+                </title>
+                <desc id="gl-svg-desc">
+                  Bánh răng A màu xanh dương và bánh răng B màu vàng hổ phách
+                  cùng quay ngược chiều nhau để tìm Bội chung nhỏ nhất.
+                </desc>
+                <defs>
+                  <pattern
+                    id="gl-grid-pattern"
+                    width="24"
+                    height="24"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 24 0 L 0 0 0 24"
+                      class="gl-grid-line"
+                    />
+                  </pattern>
+                </defs>
+                <rect
+                  x="0"
+                  y="0"
+                  width="760"
+                  height="440"
+                  fill="url(#gl-grid-pattern)"
+                />
+                <g id="gl-svg-axis-layer"></g>
+                <g id="gl-svg-gears-layer"></g>
+                <g id="gl-svg-contact-layer"></g>
+              </svg>
+            </div>
+
+            <div class="gl-legend-bar">
+              <div class="gl-legend-item">
+                <span class="gl-legend-swatch gl-swatch-a" aria-hidden="true"></span>
+                <span id="gl-legend-a">Bánh răng A (12 răng) — quay thuận chiều kim đồng hồ</span>
+              </div>
+              <div class="gl-legend-item">
+                <span class="gl-legend-swatch gl-swatch-b" aria-hidden="true"></span>
+                <span id="gl-legend-b">Bánh răng B (18 răng) — quay ngược chiều kim đồng hồ</span>
+              </div>
+              <div class="gl-legend-item">
+                <span class="gl-legend-swatch gl-swatch-lcm" aria-hidden="true"></span>
+                <span>Điểm gặp lại (BCNN)</span>
+              </div>
+            </div>
+          </div>
+
+          <section class="gl-card gl-timeline-card" aria-label="Trục thời gian và bội số">
+            <div class="gl-timeline-header">
+              <div>
+                <h2 class="gl-section-title">Tiến trình ăn khớp &amp; Trục bội số</h2>
+                <p class="gl-section-desc">
+                  Kéo thanh trượt hoặc quan sát thời điểm mỗi bánh răng hoàn thành 1 vòng quay
+                </p>
+              </div>
+              <div class="gl-timeline-cycle-meta" id="gl-cycle-meta">
+                Chu kỳ BCNN: 36 răng
+              </div>
+            </div>
+
+            <div class="gl-timeline-svg-wrap">
+              <svg
+                id="gl-timeline-svg"
+                class="gl-timeline-svg"
+                viewBox="0 0 720 116"
+                aria-label="Biểu đồ vạch bội số của A và B"
+              ></svg>
+            </div>
+
+            <div class="gl-scrubber-row">
+              <label class="gl-sr-only" for="gl-timeline-scrubber">
+                Điều chỉnh số răng đã ăn khớp
+              </label>
+              <input
+                type="range"
+                id="gl-timeline-scrubber"
+                class="gl-range gl-scrubber-range"
+                min="0"
+                max="36"
+                step="0.05"
+                value="0"
+              />
+              <div class="gl-scrubber-bounds">
+                <span>0 răng</span>
+                <span id="gl-scrubber-mid">18 răng</span>
+                <span id="gl-scrubber-max">36 răng (BCNN)</span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <aside class="gl-control-column" aria-label="Bảng điều khiển và phân tích toán học">
+          <section class="gl-card gl-panel">
+            <h2 class="gl-section-title">Thiết lập số răng</h2>
+
+            <div class="gl-param-block gl-param-a">
+              <div class="gl-param-header">
+                <label class="gl-param-label" for="gl-slider-a">
+                  Bánh răng A (Z<sub>A</sub>)
+                </label>
+                <div class="gl-stepper">
+                  <button
+                    type="button"
+                    class="gl-step-btn"
+                    id="gl-dec-a"
+                    aria-label="Giảm 1 răng bánh A"
+                  >
+                    −
+                  </button>
+                  <span class="gl-param-value" id="gl-value-a">12 răng</span>
+                  <button
+                    type="button"
+                    class="gl-step-btn"
+                    id="gl-inc-a"
+                    aria-label="Tăng 1 răng bánh A"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <input
+                type="range"
+                id="gl-slider-a"
+                class="gl-range gl-range-a"
+                min="6"
+                max="30"
+                step="1"
+                value="12"
+              />
+              <div class="gl-range-bounds">
+                <span>6 răng</span>
+                <span>18 răng</span>
+                <span>30 răng</span>
+              </div>
+            </div>
+
+            <div class="gl-param-block gl-param-b">
+              <div class="gl-param-header">
+                <label class="gl-param-label" for="gl-slider-b">
+                  Bánh răng B (Z<sub>B</sub>)
+                </label>
+                <div class="gl-stepper">
+                  <button
+                    type="button"
+                    class="gl-step-btn"
+                    id="gl-dec-b"
+                    aria-label="Giảm 1 răng bánh B"
+                  >
+                    −
+                  </button>
+                  <span class="gl-param-value" id="gl-value-b">18 răng</span>
+                  <button
+                    type="button"
+                    class="gl-step-btn"
+                    id="gl-inc-b"
+                    aria-label="Tăng 1 răng bánh B"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <input
+                type="range"
+                id="gl-slider-b"
+                class="gl-range gl-range-b"
+                min="6"
+                max="30"
+                step="1"
+                value="18"
+              />
+              <div class="gl-range-bounds">
+                <span>6 răng</span>
+                <span>18 răng</span>
+                <span>30 răng</span>
+              </div>
+            </div>
+
+            <div class="gl-divider"></div>
+
+            <div class="gl-playback-section">
+              <div class="gl-playback-primary-row">
+                <button
+                  type="button"
+                  class="gl-btn gl-btn-primary"
+                  id="gl-play-btn"
+                >
+                  <svg
+                    class="gl-btn-icon"
+                    id="gl-play-icon"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M6.3 4.1A1 1 0 0 0 5 5v10a1 1 0 0 0 1.5.86l8.5-5a1 1 0 0 0 0-1.72l-8.5-5Z" />
+                  </svg>
+                  <span id="gl-play-label">Chạy mô phỏng</span>
+                </button>
+                <button
+                  type="button"
+                  class="gl-btn gl-btn-secondary"
+                  id="gl-reset-btn"
+                >
+                  Đặt lại
+                </button>
+              </div>
+
+              <div class="gl-step-controls" role="group" aria-label="Điều khiển từng bước">
+                <button
+                  type="button"
+                  class="gl-btn gl-btn-subtle"
+                  id="gl-step-back-btn"
+                >
+                  −1 răng
+                </button>
+                <button
+                  type="button"
+                  class="gl-btn gl-btn-subtle"
+                  id="gl-step-fwd-btn"
+                >
+                  +1 răng
+                </button>
+                <button
+                  type="button"
+                  class="gl-btn gl-btn-subtle"
+                  id="gl-step-rev-a-btn"
+                >
+                  +1 vòng A
+                </button>
+                <button
+                  type="button"
+                  class="gl-btn gl-btn-subtle"
+                  id="gl-jump-lcm-btn"
+                >
+                  Đến BCNN
+                </button>
+              </div>
+
+              <div class="gl-speed-row">
+                <span class="gl-speed-label">Tốc độ</span>
+                <div class="gl-segmented" id="gl-speed-segmented" role="group" aria-label="Tốc độ mô phỏng">
+                  <button type="button" class="gl-seg-btn" data-speed="0.5">0.5×</button>
+                  <button type="button" class="gl-seg-btn gl-is-active" data-speed="1">1×</button>
+                  <button type="button" class="gl-seg-btn" data-speed="2">2×</button>
+                  <button type="button" class="gl-seg-btn" data-speed="4">4×</button>
+                </div>
+              </div>
+
+              <label class="gl-checkbox-row" for="gl-autostop-toggle">
+                <input
+                  type="checkbox"
+                  id="gl-autostop-toggle"
+                  class="gl-checkbox"
+                  checked
+                />
+                <span>Tự động dừng khi hai dấu gặp lại tại BCNN</span>
+              </label>
+            </div>
+          </section>
+
+          <section class="gl-card gl-panel" aria-label="Thông số chuyển động hiện tại">
+            <h2 class="gl-section-title">Số vòng quay &amp; Góc quay</h2>
+            <div class="gl-metrics-grid">
+              <div class="gl-metric-cell gl-metric-a">
+                <span class="gl-metric-label">Số vòng Bánh A</span>
+                <strong class="gl-metric-number" id="gl-revs-a">0.00 vòng</strong>
+                <span class="gl-metric-sub" id="gl-target-revs-a">Mục tiêu: 3 vòng</span>
+              </div>
+              <div class="gl-metric-cell gl-metric-b">
+                <span class="gl-metric-label">Số vòng Bánh B</span>
+                <strong class="gl-metric-number" id="gl-revs-b">0.00 vòng</strong>
+                <span class="gl-metric-sub" id="gl-target-revs-b">Mục tiêu: 2 vòng</span>
+              </div>
+              <div class="gl-metric-cell">
+                <span class="gl-metric-label">Góc quay Bánh A</span>
+                <strong class="gl-metric-number" id="gl-angle-a">0°</strong>
+                <span class="gl-metric-sub">Thuận chiều KĐH</span>
+              </div>
+              <div class="gl-metric-cell">
+                <span class="gl-metric-label">Góc quay Bánh B</span>
+                <strong class="gl-metric-number" id="gl-angle-b">0°</strong>
+                <span class="gl-metric-sub">Ngược chiều KĐH</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="gl-card gl-panel gl-math-panel" aria-label="Phân tích Toán học">
+            <h2 class="gl-section-title">Phân tích Toán học</h2>
+
+            <div class="gl-kpi-pair">
+              <div class="gl-kpi-box gl-kpi-lcm">
+                <span class="gl-kpi-label">BCNN(A, B)</span>
+                <strong class="gl-kpi-val" id="gl-math-lcm">36</strong>
+                <span class="gl-kpi-hint">răng để gặp lại</span>
+              </div>
+              <div class="gl-kpi-box">
+                <span class="gl-kpi-label">ƯCLN(A, B)</span>
+                <strong class="gl-kpi-val" id="gl-math-gcd">6</strong>
+                <span class="gl-kpi-hint" id="gl-math-ratio">Tỉ số 2 : 3</span>
+              </div>
+            </div>
+
+            <dl class="gl-formula-list">
+              <div class="gl-formula-row">
+                <dt>Phân tích thừa số</dt>
+                <dd class="gl-mono" id="gl-math-factors">
+                  12 = 2² × 3 · 18 = 2 × 3²
+                </dd>
+              </div>
+              <div class="gl-formula-row">
+                <dt>Công thức BCNN</dt>
+                <dd class="gl-mono" id="gl-math-formula">
+                  (12 × 18) ÷ 6 = 36
+                </dd>
+              </div>
+              <div class="gl-formula-row">
+                <dt>Số vòng gặp lại</dt>
+                <dd class="gl-mono" id="gl-math-cycles">
+                  A: 36 ÷ 12 = 3 vòng · B: 36 ÷ 18 = 2 vòng
+                </dd>
+              </div>
+              <div class="gl-formula-row">
+                <dt>Dãy bội chung</dt>
+                <dd class="gl-mono" id="gl-math-multiples">
+                  B(12) &amp; B(18) → 36
+                </dd>
+              </div>
+            </dl>
+          </section>
+        </aside>
+      </main>
+    </div>
+  </body>
+</html>
